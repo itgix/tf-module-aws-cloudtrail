@@ -36,8 +36,8 @@ data "aws_iam_policy_document" "cloudtrail_logs" {
       "logs:CreateLogStream",
     ]
     resources = [
-      "arn:aws:logs:${var.aws_region}:${var.account_id}:log-group:management-log-group:log-stream:${var.account_id}_CloudTrail_${var.aws_region}*",
-      "arn:aws:logs:${var.aws_region}:${var.account_id}:log-group:management-log-group:log-stream:${var.aws_organization_id}_*",
+      "arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:management-log-group:log-stream:${var.security_account_id}_CloudTrail_${var.aws_region}*",
+      "arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:management-log-group:log-stream:${var.aws_organization_id}_*",
     ]
   }
 
@@ -48,8 +48,8 @@ data "aws_iam_policy_document" "cloudtrail_logs" {
       "logs:PutLogEvents",
     ]
     resources = [
-      "arn:aws:logs:${var.aws_region}:${var.account_id}:log-group:management-log-group:log-stream:${var.account_id}_CloudTrail_${var.aws_region}*",
-      "arn:aws:logs:${var.aws_region}:${var.account_id}:log-group:management-log-group:log-stream:${var.aws_organization_id}_*",
+      "arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:management-log-group:log-stream:${var.security_account_id}_CloudTrail_${var.aws_region}*",
+      "arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:management-log-group:log-stream:${var.aws_organization_id}_*",
     ]
   }
 }

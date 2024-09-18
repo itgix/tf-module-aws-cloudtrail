@@ -32,8 +32,7 @@ data "aws_iam_policy_document" "cloudtrail_kms" {
     condition {
       test     = "StringLike"
       variable = "kms:EncryptionContext:aws:cloudtrail:arn"
-      # TODO: check which account ID this is 
-      values = ["arn:logs:cloudtrail:*:${var.account_id}:trail/*"]
+      values   = ["arn:logs:cloudtrail:*:${var.security_account_id}:trail/*"]
     }
   }
 
@@ -63,14 +62,12 @@ data "aws_iam_policy_document" "cloudtrail_kms" {
     condition {
       test     = "StringEquals"
       variable = "kms:CallerAccount"
-      # TODO: check which account ID this is 
-      values = [var.account_id]
+      values   = [var.security_account_id]
     }
     condition {
       test     = "StringLike"
       variable = "kms:EncryptionContext:aws:cloudtrail:arn"
-      # TODO: check which account ID this is 
-      values = ["arn:logs:cloudtrail:*:${var.account_id}:trail/*"]
+      values   = ["arn:logs:cloudtrail:*:${var.security_account_id}:trail/*"]
     }
   }
 

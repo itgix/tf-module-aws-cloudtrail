@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = ["arn:aws:cloudtrail:${var.aws_region}:${var.account_id}:trail/${var.cloudtrail_name}"]
+      values   = ["arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}"]
     }
   }
   statement {
@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = ["arn:aws:cloudtrail:${var.aws_region}:${var.account_id}:trail/${var.cloudtrail_name}"]
+      values   = ["arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}"]
     }
     condition {
       test     = "StringEquals"
@@ -69,7 +69,7 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
   statement {
     effect    = "Allow"
     actions   = ["s3:PutObject"]
-    resources = ["arn:aws:s3:::${aws_s3_bucket.itgix_cloudtrail_primary[0].bucket}/AWSLogs/${var.account_id}/*"]
+    resources = ["arn:aws:s3:::${aws_s3_bucket.itgix_cloudtrail_primary[0].bucket}/AWSLogs/${var.security_account_id}/*"]
 
     principals {
       type        = "Service"
@@ -79,7 +79,7 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = ["arn:aws:cloudtrail:${var.aws_region}:${var.account_id}:trail/${var.cloudtrail_name}"]
+      values   = ["arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}"]
     }
     condition {
       test     = "StringEquals"

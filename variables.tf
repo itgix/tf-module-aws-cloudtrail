@@ -3,7 +3,7 @@ variable "aws_region" {
   description = "AWS region for resource deployment"
 }
 
-variable "account_id" {
+variable "security_account_id" {
   type        = string
   description = "AWS Account ID where the resources are going to be deployed"
 }
