@@ -1,6 +1,6 @@
 # CloudWatch log group
 resource "aws_cloudwatch_log_group" "itgix_primary_cloudtrail" {
-  count             = var.guardduty_organization_security_account ? 1 : 0
+  count             = var.cloudtrail_organization_security_account ? 1 : 0
   name              = "${var.cloudtrail_name}-log-group"
   retention_in_days = var.cw_log_retention_days
 
@@ -11,7 +11,7 @@ resource "aws_cloudwatch_log_group" "itgix_primary_cloudtrail" {
 
 # CloudTrail config
 resource "aws_cloudtrail" "itgix_primary" {
-  count                      = var.guardduty_organization_security_account ? 1 : 0
+  count                      = var.cloudtrail_organization_security_account ? 1 : 0
   name                       = var.cloudtrail_name
   is_organization_trail      = var.is_organization_trail
   s3_bucket_name             = aws_s3_bucket.s3_bucket.bucket

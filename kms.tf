@@ -1,6 +1,6 @@
 # KMS key to encrypt CloudTrail logs
 resource "aws_kms_key" "cloudtrail_kms" {
-  count               = var.guardduty_organization_audit_account ? 1 : 0
+  count               = var.cloudtrail_organization_audit_account ? 1 : 0
   description         = "A KMS key used to encrypt CloudTrail log files stored in S3"
   enable_key_rotation = "true"
   policy              = data.aws_iam_policy_document.cloudtrail_kms[0].json
@@ -8,7 +8,7 @@ resource "aws_kms_key" "cloudtrail_kms" {
 
 # Policy document for the KMS key used in CloudTrail
 data "aws_iam_policy_document" "cloudtrail_kms" {
-  count   = var.guardduty_organization_audit_account ? 1 : 0
+  count   = var.cloudtrail_organization_audit_account ? 1 : 0
   version = "2012-10-17"
   statement {
     sid    = "Enable IAM User Permissions"
