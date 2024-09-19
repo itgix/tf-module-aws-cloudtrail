@@ -17,6 +17,7 @@ variable "aws_organization_id" {
 variable "s3_bucket_name" {
   type        = string
   description = "Name of the S3 bucket"
+  default     = null
 }
 
 variable "expire_s3_objects_after" {
