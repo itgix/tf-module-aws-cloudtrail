@@ -38,6 +38,11 @@ variable "cloudtrail_s3_key_alias" {
   default     = "alias/cloudtrail-s3-bucket-key"
 }
 
+variable "cloudtrail_s3_kms_arn" {
+  type        = string
+  description = "ARN of KMS key associated with Guardduty S3 bucket"
+  default     = null
+}
 
 # Cloudwatch
 variable "cw_log_retention_days" {
