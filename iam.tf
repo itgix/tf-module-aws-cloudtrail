@@ -2,7 +2,7 @@
 resource "aws_iam_role" "cloudtrail_access_to_cloudwatch" {
   count              = var.cloudtrail_organization_security_account ? 1 : 0
   name               = "CloudTrailRoleForCloudWatchLogs_${var.cloudtrail_name}"
-  assume_role_policy = data.aws_iam_policy_document.cloudtrail_logs[0].json
+  assume_role_policy = data.aws_iam_policy_document.cloudtrail_assume_role[0].json
 }
 
 # Policy document for CloudTrail IAM Role
