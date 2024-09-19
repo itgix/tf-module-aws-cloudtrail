@@ -7,11 +7,13 @@ variable "aws_region" {
 variable "security_account_id" {
   type        = string
   description = "AWS Account ID where the resources are going to be deployed"
+  default     = null
 }
 
 variable "aws_organization_id" {
   type        = string
   description = "Identifier for AWS Organization"
+  default     = null
 }
 
 variable "s3_bucket_name" {
