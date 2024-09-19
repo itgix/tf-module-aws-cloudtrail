@@ -57,6 +57,7 @@ data "aws_iam_policy_document" "cloudtrail_logs" {
 
 # Attach IAM policy to the CloudTrail IAM Role
 resource "aws_iam_role_policy_attachment" "ct_cw_iam_role_policy_attachment" {
+  count      = var.cloudtrail_organization_security_account ? 1 : 0
   role       = aws_iam_role.cloudtrail_access_to_cloudwatch[0].name
   policy_arn = aws_iam_policy.cloudtrail_access_to_cloudwatch_policy[0].arn
 }
