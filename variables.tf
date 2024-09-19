@@ -1,6 +1,7 @@
 variable "aws_region" {
   type        = string
   description = "AWS region for resource deployment"
+  default     = "eu-central-1"
 }
 
 variable "security_account_id" {
