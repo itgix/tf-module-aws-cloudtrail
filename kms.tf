@@ -6,6 +6,12 @@ resource "aws_kms_key" "cloudtrail_kms" {
   policy              = data.aws_iam_policy_document.cloudtrail_kms[0].json
 }
 
+resource "aws_kms_alias" "cloudtrail_key_alias" {
+  count         = var.cloudtrail_organization_audit_account ? 1 : 0
+  name          = var.cloudtrail_s3_key_alias
+  target_key_id = aws_kms_key.cloudtrail_kms[0].key_id
+}
+
 # Policy document for the KMS key used in CloudTrail
 data "aws_iam_policy_document" "cloudtrail_kms" {
   count   = var.cloudtrail_organization_audit_account ? 1 : 0

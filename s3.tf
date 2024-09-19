@@ -1,7 +1,7 @@
 # S3 bucket to store CloudTrail logs
 resource "aws_s3_bucket" "itgix_cloudtrail_primary" {
   count  = var.cloudtrail_organization_audit_account ? 1 : 0
-  bucket = var.s3_bucket_name
+  bucket = var.cloudtrail_s3_bucket_name
 }
 
 # Attaching policy to S3 bucket allowing CloudTrail to write logs in it 

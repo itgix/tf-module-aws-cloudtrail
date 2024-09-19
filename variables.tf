@@ -1,3 +1,5 @@
+# TODO: fix comments of vars
+# Main
 variable "aws_region" {
   type        = string
   description = "AWS region for resource deployment"
@@ -16,7 +18,8 @@ variable "aws_organization_id" {
   default     = null
 }
 
-variable "s3_bucket_name" {
+# S3
+variable "cloudtrail_s3_bucket_name" {
   type        = string
   description = "Name of the S3 bucket"
   default     = null
@@ -28,6 +31,15 @@ variable "expire_s3_objects_after" {
   default     = 730
 }
 
+# KMS
+variable "cloudtrail_s3_key_alias" {
+  type        = string
+  description = "Alias name to configured on KMS key"
+  default     = "alias/cloudtrail-s3-bucket-key"
+}
+
+
+# Cloudwatch
 variable "cw_log_retention_days" {
   type        = number
   description = "Retention days for CloudWatch logs"
