@@ -60,7 +60,7 @@ variable "cloudtrail_enabled" {
 variable "cloudtrail_name" {
   type        = string
   description = "Name of  the CloudTrail"
-  default     = "default-cloudtrail"
+  default     = "itgix-landing-zones"
 }
 
 variable "is_organization_trail" {
