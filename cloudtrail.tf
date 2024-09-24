@@ -1,3 +1,4 @@
+# TODO: add conditionals in tf module to either enable s3 or cloudwatch for cloudtrail logs, but not both
 # CloudTrail config
 resource "aws_cloudtrail" "itgix_primary" {
   count = var.cloudtrail_organization_security_account ? 1 : 0
