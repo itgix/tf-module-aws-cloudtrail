@@ -1,4 +1,3 @@
-# TODO: fix comments of vars
 # Main
 variable "aws_region" {
   type        = string
@@ -16,63 +15,6 @@ variable "aws_organization_id" {
   type        = string
   description = "Identifier for AWS Organization"
   default     = null
-}
-
-# S3
-variable "cloudtrail_s3_bucket_name" {
-  type        = string
-  description = "Name of the S3 bucket"
-  default     = null
-}
-
-variable "expire_s3_objects_after" {
-  type        = number
-  description = "Days after which S3 objects will expire"
-  default     = 730
-}
-
-# KMS
-variable "cloudtrail_s3_key_alias" {
-  type        = string
-  description = "Alias name to configured on KMS key"
-  default     = "alias/cloudtrail-s3-bucket-key"
-}
-
-variable "cloudtrail_s3_kms_arn" {
-  type        = string
-  description = "ARN of KMS key associated with Guardduty S3 bucket"
-  default     = null
-}
-
-# Cloudwatch
-variable "cw_log_retention_days" {
-  type        = number
-  description = "Retention days for CloudWatch logs"
-  default     = 180
-}
-
-variable "cloudtrail_enabled" {
-  type        = bool
-  default     = true
-  description = "Whether CloudTrail is enabled"
-}
-
-variable "cloudtrail_name" {
-  type        = string
-  description = "Name of  the CloudTrail"
-  default     = "itgix-landing-zones"
-}
-
-variable "is_organization_trail" {
-  type        = bool
-  description = "If the trail is for AWS Organization"
-  default     = true
-}
-
-variable "enable_log_file_validation" {
-  type        = bool
-  description = "Enables CloudTrail log file validation"
-  default     = true
 }
 
 variable "cloudtrail_organization_management_account" {
@@ -97,4 +39,92 @@ variable "organization_security_account_id" {
   type        = string
   description = "The account ID of the organization security account"
   default     = ""
+}
+
+# S3
+variable "cloudtrail_s3_bucket_name" {
+  type        = string
+  description = "Name of the S3 bucket where Cloudtrail logs will be stored - can be stored either in Cloudwatch or S3 or both"
+  default     = "${var.cloudtrail_name}-logs"
+}
+
+variable "cloudtrail_expire_s3_logs_after_days" {
+  type        = number
+  description = "Days after which S3 objects will expire"
+  default     = 730
+}
+
+# KMS
+variable "cloudtrail_s3_key_alias" {
+  type        = string
+  description = "Alias name to configured on KMS key"
+  default     = "alias/cloudtrail-s3-bucket-key"
+}
+
+variable "cloudtrail_s3_kms_arn" {
+  type        = string
+  description = "ARN of KMS key associated with Guardduty S3 bucket"
+  default     = null
+}
+
+# Cloudwatch
+variable "cloudtrail_log_retention_days" {
+  type        = number
+  description = "Retention days for CloudWatch logs"
+  default     = 180
+}
+
+variable "cloudtrail_log_group_name" {
+  type        = string
+  default     = "${var.cloudtrail_name}-logs"
+  description = "Name of the log group where Cloudtrail logs will be stored - can be stored either in Cloudwatch or S3 or both"
+}
+
+variable "cloudwatch_logs_group_arn" {
+  type        = string
+  description = "Log group name using an ARN that represents the log group to which CloudTrail logs will be delivered. Note that CloudTrail requires the Log Stream wildcard."
+  default     = null
+}
+
+variable "cloudwatch_logs_role_arn" {
+  type        = string
+  description = "Role for the CloudWatch Logs endpoint to assume to write to a user’s log group."
+  default     = null
+}
+
+# Cloudtrail
+variable "cloudtrail_enabled" {
+  type        = bool
+  default     = true
+  description = "Whether CloudTrail is enabled"
+}
+
+variable "cloudtrail_name" {
+  type        = string
+  description = "Name of  the CloudTrail"
+  default     = "itgix-landing-zones"
+}
+
+variable "is_organization_trail" {
+  type        = bool
+  description = "Whether the trail is an AWS Organizations trail. Organization trails log events for the master account and all member accounts. Can only be created in the organization master account."
+  default     = true
+}
+
+variable "include_global_service_events" {
+  type        = bool
+  default     = true
+  description = "Whether the trail is publishing events from global services such as IAM to the log files"
+}
+
+variable "enable_log_file_validation" {
+  type        = bool
+  description = "Enables CloudTrail log file validation"
+  default     = true
+}
+
+variable "is_multi_region_trail" {
+  type        = bool
+  default     = false
+  description = "Whether the trail is created in the current region or in all regions"
 }

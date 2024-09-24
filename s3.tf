@@ -1,4 +1,4 @@
-# S3 bucket to store CloudTrail logs
+# S3 bucket to store CloudTrail logs - can be stored either in Cloudwatch or S3 or both
 resource "aws_s3_bucket" "itgix_cloudtrail_primary" {
   count  = var.cloudtrail_organization_audit_account ? 1 : 0
   bucket = var.cloudtrail_s3_bucket_name
