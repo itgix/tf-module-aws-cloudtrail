@@ -45,7 +45,7 @@ variable "organization_security_account_id" {
 variable "cloudtrail_s3_bucket_name" {
   type        = string
   description = "Name of the S3 bucket where Cloudtrail logs will be stored - can be stored either in Cloudwatch or S3 or both"
-  default     = "${var.cloudtrail_name}-logs"
+  default     = "itgix-landing-zones-cloudtrail-logs"
 }
 
 variable "cloudtrail_expire_s3_logs_after_days" {
@@ -76,7 +76,7 @@ variable "cloudtrail_log_retention_days" {
 
 variable "cloudtrail_log_group_name" {
   type        = string
-  default     = "${var.cloudtrail_name}-logs"
+  default     = "itgix-landing-zones-cloudtrail-logs"
   description = "Name of the log group where Cloudtrail logs will be stored - can be stored either in Cloudwatch or S3 or both"
 }
 
