@@ -7,7 +7,7 @@ resource "aws_iam_role" "cloudtrail_access_to_cloudwatch" {
 
 # Policy document for CloudTrail IAM Role
 data "aws_iam_policy_document" "cloudtrail_assume_role" {
-  count = var.cloudtrail_organization_security_account ? 1 : 0
+  count = var.cloudtrail_organization_audit_account ? 1 : 0
   statement {
     actions = ["sts:AssumeRole"]
 
@@ -27,7 +27,7 @@ resource "aws_iam_policy" "cloudtrail_access_to_cloudwatch_policy" {
 
 # Policy document for CloudTrail to create logs
 data "aws_iam_policy_document" "cloudtrail_logs" {
-  count   = var.cloudtrail_organization_security_account ? 1 : 0
+  count   = var.cloudtrail_organization_audit_account ? 1 : 0
   version = "2012-10-17"
 
   statement {
