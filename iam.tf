@@ -1,6 +1,6 @@
-# IAM Role for CloudTrail to have access to CloudWatch logs
+# IAM Role for CloudTrail to have access to CloudWatch logs in the Audit account
 resource "aws_iam_role" "cloudtrail_access_to_cloudwatch" {
-  count              = var.cloudtrail_organization_security_account ? 1 : 0
+  count              = var.cloudtrail_organization_audit_account ? 1 : 0
   name               = "CloudTrailRoleForCloudWatchLogs-${var.cloudtrail_name}"
   assume_role_policy = data.aws_iam_policy_document.cloudtrail_assume_role[0].json
 }
@@ -20,7 +20,7 @@ data "aws_iam_policy_document" "cloudtrail_assume_role" {
 
 # IAM Policy allowing CloudTrail to create logs
 resource "aws_iam_policy" "cloudtrail_access_to_cloudwatch_policy" {
-  count  = var.cloudtrail_organization_security_account ? 1 : 0
+  count  = var.cloudtrail_organization_audit_account ? 1 : 0
   name   = "CloudTrailCloudWatchLogsPolicy"
   policy = data.aws_iam_policy_document.cloudtrail_logs[0].json
 }
@@ -57,7 +57,7 @@ data "aws_iam_policy_document" "cloudtrail_logs" {
 
 # Attach IAM policy to the CloudTrail IAM Role
 resource "aws_iam_role_policy_attachment" "cloudtrail_to_cloudwatch_access" {
-  count      = var.cloudtrail_organization_security_account ? 1 : 0
+  count      = var.cloudtrail_organization_audit_account ? 1 : 0
   role       = aws_iam_role.cloudtrail_access_to_cloudwatch[0].name
   policy_arn = aws_iam_policy.cloudtrail_access_to_cloudwatch_policy[0].arn
 }
