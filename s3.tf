@@ -20,7 +20,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "s3_bucket_lifecycle" {
     status = "Enabled"
 
     expiration {
-      days = var.expire_s3_objects_after
+      days = var.cloudtrail_expire_s3_logs_after_days
     }
   }
 }
