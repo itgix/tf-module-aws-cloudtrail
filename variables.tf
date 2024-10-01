@@ -133,4 +133,5 @@ variable "is_multi_region_trail" {
 variable "assume_role_principals" {
   type        = list(string)
   description = "AWS principal where Cloudtrail runs, used to assume the IAM role for writing logs to Cloudwatch in the Audit account"
+  default     = null
 }
