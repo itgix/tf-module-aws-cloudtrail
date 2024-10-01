@@ -14,7 +14,7 @@ data "aws_iam_policy_document" "cloudtrail_assume_role" {
     principals {
       #type        = "Service"
       type        = "AWS"
-      identifiers = [var.principals]
+      identifiers = [var.assume_role_principals]
     }
   }
 }
