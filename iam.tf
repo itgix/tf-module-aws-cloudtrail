@@ -12,9 +12,10 @@ data "aws_iam_policy_document" "cloudtrail_assume_role" {
     actions = ["sts:AssumeRole"]
 
     principals {
-      #type        = "Service"
-      type        = "AWS"
-      identifiers = var.assume_role_principals
+      type        = "Service"
+      identifiers = ["cloudtrail.amazonaws.com"]
+      #type        = "AWS"
+      #identifiers = var.assume_role_principals
     }
   }
 }
