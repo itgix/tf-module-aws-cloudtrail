@@ -32,26 +32,17 @@ data "aws_iam_policy_document" "cloudtrail_logs" {
   version = "2012-10-17"
 
   statement {
-    sid    = "AWSCloudTrailCreateLogStream2014110"
+    sid    = "AWSCloudTrailLogs"
     effect = "Allow"
     actions = [
       "logs:CreateLogStream",
-    ]
-    resources = [
-      "arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:cloudtrail-logs:log-stream:${var.security_account_id}_CloudTrail_${var.aws_region}*",
-      "arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:cloudtrail-logs:log-stream:${var.aws_organization_id}_*",
-    ]
-  }
-
-  statement {
-    sid    = "AWSCloudTrailPutLogEvents20141101"
-    effect = "Allow"
-    actions = [
       "logs:PutLogEvents",
     ]
     resources = [
-      "arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:cloudtrail-logs:log-stream:${var.security_account_id}_CloudTrail_${var.aws_region}*",
-      "arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:cloudtrail-logs:log-stream:${var.aws_organization_id}_*",
+      #"arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:cloudtrail-logs:log-stream:${var.security_account_id}_CloudTrail_${var.aws_region}*",
+      #"arn:aws:logs:${var.aws_region}:${var.security_account_id}:log-group:cloudtrail-logs:log-stream:${var.aws_organization_id}_*",
+      "${aws_cloudwatch_log_group.itgix_primary_cloudtrail[0].arn}:log-stream:${var.security_account_id}_CloudTrail_${var.aws_region}*",
+      "${aws_cloudwatch_log_group.itgix_primary_cloudtrail[0].arn}:log-stream:${var.aws_organization_id}_*",
     ]
   }
 }
