@@ -130,8 +130,7 @@ variable "is_multi_region_trail" {
 }
 
 # IAM
-variable "principals" {
-  type        = map(any)
-  description = "IAM principals"
+variable "assume_role_principals" {
+  type        = list(string)
+  description = "AWS principal where Cloudtrail runs, used to assume the IAM role for writing logs to Cloudwatch in the Audit account"
 }
-
