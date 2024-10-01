@@ -128,3 +128,10 @@ variable "is_multi_region_trail" {
   default     = false
   description = "Whether the trail is created in the current region or in all regions"
 }
+
+# IAM
+variable "principals" {
+  type        = map(any)
+  description = "IAM principals"
+}
+
