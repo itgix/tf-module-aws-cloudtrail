@@ -103,36 +103,3 @@ variable "is_multi_region_trail" {
   default     = false
   description = "Whether the trail is created in the current region or in all regions"
 }
-
-# TODO: remove cloudwatch log group because it doesn't work cross account from cloudtrail
-# Cloudwatch
-#variable "cloudtrail_log_retention_days" {
-#type        = number
-#description = "Retention days for CloudWatch logs"
-#default     = 180
-#}
-
-#variable "cloudtrail_log_group_name" {
-#type        = string
-#default     = "itgix-landing-zones-cloudtrail-logs"
-#description = "Name of the log group where Cloudtrail logs will be stored - can be stored either in Cloudwatch or S3 or both"
-#}
-
-#variable "cloudwatch_logs_group_arn" {
-#type        = string
-#description = "Log group name using an ARN that represents the log group to which CloudTrail logs will be delivered. Note that CloudTrail requires the Log Stream wildcard."
-#default     = null
-#}
-
-#variable "cloudwatch_logs_role_arn" {
-#type        = string
-#description = "Role for the CloudWatch Logs endpoint to assume to write to a user’s log group."
-#default     = null
-#}
-
-# IAM
-#variable "assume_role_principals" {
-#type        = list(string)
-#description = "AWS principal where Cloudtrail runs, used to assume the IAM role for writing logs to Cloudwatch in the Audit account"
-#default     = null
-#}

@@ -8,11 +8,6 @@ resource "aws_cloudtrail" "itgix_primary" {
   s3_bucket_name             = var.cloudtrail_s3_bucket_name
   enable_log_file_validation = var.enable_log_file_validation
 
-  # log group to store cloudtrail logs 
-  # TODO: remove cloudwatch log group because it doesn't work cross account from cloudtrail
-  #cloud_watch_logs_group_arn = var.cloudwatch_logs_group_arn
-  #cloud_watch_logs_role_arn  = var.cloudwatch_logs_role_arn
-
   kms_key_id = var.cloudtrail_s3_kms_arn
 
   # whether the trail is an AWS Organizations trail. Organization trails log events for the master account and all member accounts. Can only be created in the organization master account.
