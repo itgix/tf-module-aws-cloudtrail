@@ -9,8 +9,9 @@ resource "aws_cloudtrail" "itgix_primary" {
   enable_log_file_validation = var.enable_log_file_validation
 
   # log group to store cloudtrail logs 
-  cloud_watch_logs_group_arn = var.cloudwatch_logs_group_arn
-  cloud_watch_logs_role_arn  = var.cloudwatch_logs_role_arn
+  # TODO: remove cloudwatch log group because it doesn't work cross account from cloudtrail
+  #cloud_watch_logs_group_arn = var.cloudwatch_logs_group_arn
+  #cloud_watch_logs_role_arn  = var.cloudwatch_logs_role_arn
 
   kms_key_id = var.cloudtrail_s3_kms_arn
 
