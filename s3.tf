@@ -42,15 +42,21 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = ["arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}"]
+      values = [
+        "arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}",
+        "arn:aws:cloudtrail:${var.aws_region}:${var.management_account_id}:trail/${var.cloudtrail_name}"
+      ]
     }
   }
 
   # allows logging in the event the trail is changed from an organization trail to a trail for that account only
   statement {
-    effect    = "Allow"
-    actions   = ["s3:PutObject"]
-    resources = ["${aws_s3_bucket.itgix_cloudtrail_primary[0].arn}/AWSLogs/${var.security_account_id}/*"]
+    effect  = "Allow"
+    actions = ["s3:PutObject"]
+    resources = [
+      "${aws_s3_bucket.itgix_cloudtrail_primary[0].arn}/AWSLogs/${var.security_account_id}/*",
+      "${aws_s3_bucket.itgix_cloudtrail_primary[0].arn}/AWSLogs/${var.management_account_id}/*"
+    ]
 
     principals {
       type        = "Service"
@@ -60,7 +66,10 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = ["arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}"]
+      values = [
+        "arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}",
+        "arn:aws:cloudtrail:${var.aws_region}:${var.management_account_id}:trail/${var.cloudtrail_name}"
+      ]
     }
 
     condition {
@@ -84,7 +93,10 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
-      values   = ["arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}"]
+      values = [
+        "arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}",
+        "arn:aws:cloudtrail:${var.aws_region}:${var.management_account_id}:trail/${var.cloudtrail_name}"
+      ]
     }
     condition {
       test     = "StringEquals"

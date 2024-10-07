@@ -7,7 +7,14 @@ variable "aws_region" {
 
 variable "security_account_id" {
   type        = string
-  description = "AWS Account ID where the resources are going to be deployed"
+  description = "AWS Account ID where Cloudtrail is deployed - security account"
+  default     = null
+}
+
+# TODO: check if this is really needed
+variable "management_account_id" {
+  type        = string
+  description = "AWS Account ID of the management account for additional permissions"
   default     = null
 }
 
