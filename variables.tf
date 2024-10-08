@@ -11,7 +11,6 @@ variable "security_account_id" {
   default     = null
 }
 
-# TODO: check if all accounts are really needed and not only security account where cloudtrail is enabled
 variable "management_account_id" {
   type        = string
   description = "AWS Account ID of the management account for additional permissions"
@@ -19,6 +18,12 @@ variable "management_account_id" {
 }
 
 variable "shared_services_account_id" {
+  type        = string
+  description = "AWS Account ID of the management account for additional permissions"
+  default     = null
+}
+
+variable "audit_account_id" {
   type        = string
   description = "AWS Account ID of the management account for additional permissions"
   default     = null
@@ -41,7 +46,6 @@ variable "prod_account_id" {
   description = "AWS Account ID of the management account for additional permissions"
   default     = null
 }
-# 
 
 variable "aws_organization_id" {
   type        = string
