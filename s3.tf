@@ -19,6 +19,10 @@ resource "aws_s3_bucket_lifecycle_configuration" "s3_bucket_lifecycle" {
     id     = "expire-objects-older-than-two-years"
     status = "Enabled"
 
+    filter {
+      prefix = ""
+    }
+
     expiration {
       days = var.cloudtrail_expire_s3_logs_after_days
     }
