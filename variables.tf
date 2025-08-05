@@ -139,3 +139,31 @@ variable "is_multi_region_trail" {
   default     = false
   description = "Whether the trail is created in the current region or in all regions"
 }
+
+# CloudWatch Log Group name for CloudTrail logs
+variable "cloudtrail_log_group_name" {
+  description = "The name of the CloudWatch Log Group to which CloudTrail logs will be delivered"
+  type        = string
+  default     = "/aws/cloudtrail/itgix-landing-zones"
+}
+
+# Retention period for CloudTrail logs in CloudWatch Logs (in days)
+variable "cloudtrail_log_retention_days" {
+  description = "Number of days to retain CloudTrail logs in CloudWatch Logs"
+  type        = number
+  default     = 7
+}
+
+# IAM Role name for CloudTrail to write logs to CloudWatch
+variable "cloudtrail_iam_role_name" {
+  description = "Name of the IAM role used by CloudTrail to deliver logs to CloudWatch Logs"
+  type        = string
+  default     = "itgix-cloudtrail-to-cloudwatch-role"
+}
+
+# IAM Policy name attached to the CloudTrail IAM role
+variable "cloudtrail_iam_policy_name" {
+  description = "Name of the IAM policy attached to the CloudTrail-to-CloudWatch IAM role"
+  type        = string
+  default     = "ITGixCloudTrailLogsPolicy"
+}
