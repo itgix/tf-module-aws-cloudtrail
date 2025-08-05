@@ -1,4 +1,3 @@
-# TODO: add option to store logs in cloudwatch directly instead of s3 - the cw log group for this has to be in the logging & audit account
 # CloudTrail config
 resource "aws_cloudtrail" "itgix_primary" {
   count = var.cloudtrail_organization_security_account ? 1 : 0
@@ -17,4 +16,8 @@ resource "aws_cloudtrail" "itgix_primary" {
   include_global_service_events = var.include_global_service_events
 
   is_multi_region_trail = var.is_multi_region_trail
+
+  # cloudwatch logging
+  cloud_watch_logs_group_arn = "${aws_cloudwatch_log_group.itgix_primary_cloudtrail[0].arn}:*"
+  cloud_watch_logs_role_arn  = aws_iam_role.itgix_iam_role_for_cloudtrail[0].arn
 }
