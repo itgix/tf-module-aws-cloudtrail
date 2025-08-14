@@ -53,12 +53,6 @@ variable "aws_organization_id" {
   default     = null
 }
 
-variable "cloudtrail_organization_management_account" {
-  type        = bool
-  default     = false
-  description = "Set to true when running from organization management account to configure the cloudtrail delegated admin"
-}
-
 variable "cloudtrail_organization_audit_account" {
   type        = bool
   default     = false
@@ -167,3 +161,4 @@ variable "cloudtrail_iam_policy_name" {
   type        = string
   default     = "ITGixCloudTrailLogsPolicy"
 }
+
