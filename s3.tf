@@ -32,7 +32,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "s3_bucket_lifecycle" {
 # policy document for S3 bucket to allow Cloudtrail in all accounts to send its logs to the bucket
 data "aws_iam_policy_document" "cloudtrail_s3" {
   count = var.cloudtrail_organization_audit_account ? 1 : 0
-  # allows CloudTrail to call the Amazon S3 GetBucketAcl action on the Amazon S3 bucket
+
+  # allows CloudTrail to get bucket ACL
   statement {
     sid       = "AllowCloudTrailGetBucketAcl"
     effect    = "Allow"
@@ -64,6 +65,7 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
     sid     = "AllowCloudTrailPutPerAccount"
     effect  = "Allow"
     actions = ["s3:PutObject"]
+
     resources = [
       "${aws_s3_bucket.itgix_cloudtrail_primary[0].arn}/AWSLogs/${var.management_account_id}/*",
       "${aws_s3_bucket.itgix_cloudtrail_primary[0].arn}/AWSLogs/${var.logging_and_audit_account_id}/*",
@@ -132,6 +134,12 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       variable = "s3:x-amz-acl"
       values   = ["bucket-owner-full-control"]
     }
+
+    # Allow management account (trail owner) to write org-level logs
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceAccount"
+      values   = [var.management_account_id]
+    }
   }
 }
-
