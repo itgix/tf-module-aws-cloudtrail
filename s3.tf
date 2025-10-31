@@ -43,19 +43,21 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       identifiers = ["cloudtrail.amazonaws.com"]
     }
 
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceArn"
-      values = [
-        "arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.management_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.shared_services_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.audit_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.dev_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.stage_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.prod_account_id}:trail/${var.cloudtrail_name}"
-      ]
-    }
+    // TODO: having the SourceArn failed to create the cloudtrail (this used to work previously but something must've changed in the way AWS excpects the S3 bucket policy on the bucket that contains cloudtrail logs)
+    // we were getting error -  Error: creating CloudTrail Trail (bet99-landing-zones): operation error CloudTrail: CreateTrail, https response error StatusCode: 400, RequestID: 34d32133-a601-4b7b-a570-9656be67a236, InsufficientS3BucketPolicyException: Incorrect S3 bucket policy is detected for bucket: bet99-cloudtrail-event-history (Service: AWSCloudTrail; Status Code: 400; Error Code: InsufficientS3BucketPolicyException; Request ID: 07da7b8d-3d87-4b47-9aaf-e10203f572de; Proxy: null)
+    # condition {
+    #   test     = "StringEquals"
+    #   variable = "AWS:SourceArn"
+    #   values = [
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.management_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.shared_services_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.audit_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.dev_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.stage_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.prod_account_id}:trail/${var.cloudtrail_name}"
+    #   ]
+    # }
   }
 
   # allows logging in the event the trail is changed from an organization trail to a trail for that account only
@@ -77,19 +79,20 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       identifiers = ["cloudtrail.amazonaws.com"]
     }
 
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceArn"
-      values = [
-        "arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.management_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.shared_services_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.audit_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.dev_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.stage_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.prod_account_id}:trail/${var.cloudtrail_name}"
-      ]
-    }
+    // TODO: same issue as above
+    # condition {
+    #   test     = "StringEquals"
+    #   variable = "AWS:SourceArn"
+    #   values = [
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.management_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.shared_services_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.audit_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.dev_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.stage_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.prod_account_id}:trail/${var.cloudtrail_name}"
+    #   ]
+    # }
 
     condition {
       test     = "StringEquals"
@@ -109,19 +112,20 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       identifiers = ["cloudtrail.amazonaws.com"]
     }
 
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceArn"
-      values = [
-        "arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.management_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.shared_services_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.audit_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.dev_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.stage_account_id}:trail/${var.cloudtrail_name}",
-        "arn:aws:cloudtrail:${var.aws_region}:${var.prod_account_id}:trail/${var.cloudtrail_name}"
-      ]
-    }
+    // TODO: same issue as above
+    # condition {
+    #   test     = "StringEquals"
+    #   variable = "AWS:SourceArn"
+    #   values = [
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.security_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.management_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.shared_services_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.audit_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.dev_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.stage_account_id}:trail/${var.cloudtrail_name}",
+    #     "arn:aws:cloudtrail:${var.aws_region}:${var.prod_account_id}:trail/${var.cloudtrail_name}"
+    #   ]
+    # }
     condition {
       test     = "StringEquals"
       variable = "s3:x-amz-acl"
@@ -129,3 +133,4 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
     }
   }
 }
+
