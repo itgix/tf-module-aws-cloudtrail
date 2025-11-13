@@ -102,6 +102,13 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       variable = "s3:x-amz-acl"
       values   = ["bucket-owner-full-control"]
     }
+
+    // restrict writes to CloudTrail requests coming from our AWS Organization
+    condition {
+      test     = "StringEquals"
+      variable = "aws:PrincipalOrgID"
+      values   = [var.aws_organization_id]
+    }
   }
 
   # allow CloudTrail org-level logging (management account creates trail, all org accounts deliver)
@@ -136,6 +143,13 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       test     = "StringEquals"
       variable = "s3:x-amz-acl"
       values   = ["bucket-owner-full-control"]
+    }
+
+    // restrict writes to CloudTrail requests coming from our AWS Organization
+    condition {
+      test     = "StringEquals"
+      variable = "aws:PrincipalOrgID"
+      values   = [var.aws_organization_id]
     }
   }
 }
