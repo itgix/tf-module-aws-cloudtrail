@@ -23,7 +23,7 @@ variable "shared_services_account_id" {
   default     = null
 }
 
-variable "audit_account_id" {
+variable "logging_and_audit_account_id" {
   type        = string
   description = "AWS Account ID of the management account for additional permissions"
   default     = null
@@ -65,12 +65,6 @@ variable "cloudtrail_organization_security_account" {
   description = "Set to true when running from organization security account to configure the cloudtrail in the organization and invite member accounts"
 }
 
-variable "organization_security_account_id" {
-  type        = string
-  description = "The account ID of the organization security account"
-  default     = ""
-}
-
 # S3
 variable "cloudtrail_s3_bucket_name" {
   type        = string
@@ -98,12 +92,6 @@ variable "cloudtrail_s3_kms_arn" {
 }
 
 # Cloudtrail
-variable "cloudtrail_enabled" {
-  type        = bool
-  default     = true
-  description = "Whether CloudTrail is enabled"
-}
-
 variable "cloudtrail_name" {
   type        = string
   description = "Name of  the CloudTrail"
