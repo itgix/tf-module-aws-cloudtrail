@@ -151,12 +151,5 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       variable = "aws:PrincipalOrgID"
       values   = [var.aws_organization_id]
     }
-
-    # allow management account (trail owner) to write org-level logs
-    condition {
-      test     = "StringEquals"
-      variable = "aws:SourceAccount"
-      values   = [var.management_account_id]
-    }
   }
 }
