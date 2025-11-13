@@ -81,6 +81,7 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       identifiers = ["cloudtrail.amazonaws.com"]
     }
 
+    // cloudtrail requires this specific ACL condition for sending logs to the bucket
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
@@ -101,10 +102,18 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       variable = "s3:x-amz-acl"
       values   = ["bucket-owner-full-control"]
     }
+
+    // restrict writes to CloudTrail requests coming from our AWS Organization
+    condition {
+      test     = "StringEquals"
+      variable = "aws:PrincipalOrgID"
+      values   = [var.aws_organization_id]
+    }
   }
 
   # allow CloudTrail org-level logging (management account creates trail, all org accounts deliver)
   statement {
+    sid       = "AllowOrgLevelCloudTrailPut"
     effect    = "Allow"
     actions   = ["s3:PutObject"]
     resources = ["${aws_s3_bucket.itgix_cloudtrail_primary[0].arn}/AWSLogs/${var.aws_organization_id}/*"]
@@ -114,6 +123,7 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       identifiers = ["cloudtrail.amazonaws.com"]
     }
 
+    // cloudtrail requires this specific ACL condition for sending logs to the bucket
     condition {
       test     = "StringEquals"
       variable = "AWS:SourceArn"
@@ -135,7 +145,14 @@ data "aws_iam_policy_document" "cloudtrail_s3" {
       values   = ["bucket-owner-full-control"]
     }
 
-    # Allow management account (trail owner) to write org-level logs
+    // restrict writes to CloudTrail requests coming from our AWS Organization
+    condition {
+      test     = "StringEquals"
+      variable = "aws:PrincipalOrgID"
+      values   = [var.aws_organization_id]
+    }
+
+    # allow management account (trail owner) to write org-level logs
     condition {
       test     = "StringEquals"
       variable = "aws:SourceAccount"
