@@ -10,6 +10,10 @@ output "cloudtrail_cw_log_group_arn" {
   value = try(aws_cloudwatch_log_group.itgix_primary_cloudtrail[0].arn, null)
 }
 
+output "cloudtrail_cw_log_group_name" {
+  value = try(aws_cloudwatch_log_group.itgix_primary_cloudtrail[0].name, null)
+}
+
 output "cloudtrail_cw_iam_role_arn" {
   value = try(aws_iam_role.itgix_iam_role_for_cloudtrail[0].arn, null)
 }
